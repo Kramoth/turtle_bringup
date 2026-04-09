@@ -1,0 +1,15 @@
+<launch>
+    <node pkg="turtlesim" exec="turtlesim_node"/>
+    <node pkg="regulation_turtle" exec="filtered_pose_publisher_node">
+        <param name="alpha" value="0.1"/>    
+    </node>
+    <node pkg="regulation_turtle" exec="noisy_pose_publisher_node">
+        <param name="noise_min" value="-0.5"/>
+        <param name="noise_max" value="0.5"/>
+    </node>
+    <node pkg="regulation_turtle" exec="set_way_point_node">
+        <remap from="/turtle1/pose" to="/turtle1/pose_filtered"/>
+        <param name="Kpl" value="1.5"/>
+        <param name="Kp" value="20.0"/>
+    </node>
+</launch>
