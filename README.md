@@ -2,6 +2,7 @@
 ![ROS2](https://img.shields.io/badge/ROS_2-jazzy-green?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square)
 ![License](https://img.shields.io/badge/Licence-MIT-lightgrey?style=flat-square)
+
 Package ROS 2 (Jazzy) de régulation de la tortue TurtleSim. Il implémente une chaîne complète **bruit → filtrage → régulation** : une pose bruitée est publiée, filtrée par un filtre passe-bas, puis un nœud de régulation guide la tortue vers un waypoint.
 
 ---
