@@ -1,5 +1,6 @@
 <launch>
     <node pkg="turtlesim" exec="turtlesim_node"/>
+    <node pkg="regulation_turtle" exec="spawn_wp_node"/>
     <group>
         <push-ros-namespace namespace="turtle1"/>
         <node pkg="regulation_turtle" exec="filtered_pose_publisher_node">
@@ -11,8 +12,8 @@
         </node>
         <node pkg="regulation_turtle" exec="set_way_point_node">
             <remap from="pose" to="pose_filtered"/>
-            <param name="Kpl" value="1.5"/>
-            <param name="Kp" value="10.0"/>
+            <param name="Kpl" value="5.0"/>
+            <param name="Kp" value="15.0"/>
         </node>
         <timer period="5.0">
             <node pkg="regulation_turtle" exec="set_way_point_client_node"/>
