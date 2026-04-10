@@ -97,6 +97,10 @@ source install/setup.bash
 ros2 ros2 launch turtle_bringup turtle_regulation_bringup.launch.xml
 ```
 
+
+Vous devriez voir l'image suivante:
+
+![Description de l'image](image/screen_turlte.png)
 ---
 
 ## Topics
