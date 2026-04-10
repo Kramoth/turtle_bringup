@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="turtlesim" exec="turtlesim_node"/>
+    <group>
+        <push-ros-namespace namespace="turtle1"/>
+        <node pkg="regulation_turtle" exec="set_way_point_node">
+            <param name="Kpl" value="1.5"/>
+            <param name="Kp" value="30.0"/>
+        </node>
+        <timer period="2.0">
+            <node pkg="regulation_turtle" exec="set_way_point_client_node"/>
+        </timer>
+    </group>
+
+</launch>
