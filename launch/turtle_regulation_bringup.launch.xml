@@ -12,8 +12,8 @@
         </node>
         <node pkg="regulation_turtle" exec="set_way_point_node">
             <remap from="pose" to="pose_filtered"/>
-            <param name="Kpl" value="5.0"/>
-            <param name="Kp" value="15.0"/>
+            <param name="Kpl" value="1.0"/>
+            <param name="Kp" value="5.0"/>
         </node>
         <timer period="5.0">
             <node pkg="regulation_turtle" exec="set_way_point_client_node"/>
