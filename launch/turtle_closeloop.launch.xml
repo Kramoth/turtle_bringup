@@ -9,7 +9,7 @@
             <param name="Kp" value="30.0"/>
         </node>
         <timer period="2.0">
-            <node pkg="regulation_turtle" exec="dead_reckoning_square">    
+            <node pkg="regulation_turtle" exec="close_loop_position_fb">    
             </node>
         </timer>
     </group>
