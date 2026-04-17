@@ -1,4 +1,7 @@
 <launch>
+    <arg name="kpl" default="1.5"/>
+    <arg name="kp" default="30.0"/>
+
     <node pkg="turtlesim" exec="turtlesim_node"/>
     <node pkg="regulation_turtle" exec="spawn_wp_node"/>
     <group>
@@ -12,8 +15,8 @@
         </node>
         <node pkg="regulation_turtle" exec="set_way_point_node">
             <remap from="pose" to="pose_filtered"/>
-            <param name="Kpl" value="1.0"/>
-            <param name="Kp" value="10.0"/>
+            <param name="Kpl" value="$(var kpl)"/>
+            <param name="Kp" value="$(var kp)"/>
         </node>
         <timer period="5.0">
             <node pkg="regulation_turtle" exec="set_way_point_client_node"/>

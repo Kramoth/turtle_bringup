@@ -64,7 +64,7 @@ Régulateur proportionnel qui dirige la tortue vers un waypoint cible. Utilise l
 
 ---
 
-## Prérequis
+# Prérequis
 
 - ROS 2 **Jazzy Jalisco**
 - Package `turtlesim` installé :
@@ -74,7 +74,7 @@ Régulateur proportionnel qui dirige la tortue vers un waypoint cible. Utilise l
 
 ---
 
-## Installation
+# Installation
 
 ```bash
 # Cloner le dépôt dans votre workspace
@@ -91,16 +91,110 @@ source install/setup.bash
 
 ---
 
-## Lancement
+# Lancement
+
+## Dead reckoning
+```bash
+ros2 launch turtle_bringup turtle_regulation_no_noise.launch.xml
+```
+On observe le comportement suivant:
+
+<!-- ![Description de l'image](image/screen_turlte.png) -->
+<p align="center">
+  <img src="image/dead_reckoning.png" width="500"/><br>
+  <em>Figure 1 – Résultat de la régulation sous turtlesim</em>
+</p>
+
+La tortue décrit un carré mais drift dans le temps sans moyen de corriger sa position
+
+## On remplace l'estimation de la tortue par la position de la tortue
 
 ```bash
-ros2 ros2 launch turtle_bringup turtle_regulation_bringup.launch.xml
+ros2 launch turtle_bringup turtle_closeloop.launch.xml 
 ```
+On observe le comportement suivant:
 
+<!-- ![Description de l'image](image/screen_turlte.png) -->
+<p align="center">
+  <img src="image/close_loop.png" width="500"/><br>
+  <em>Figure 1 – Résultat de la régulation sous turtlesim</em>
+</p>
 
-Vous devriez voir l'image suivante:
+## On ajoute du bruit dans la position
 
-![Description de l'image](image/screen_turlte.png)
+```bash
+ros2 launch turtle_bringup turtle_closeloop_noise.launch.xml 
+```
+On observe le comportement suivant:
+
+<!-- ![Description de l'image](image/screen_turlte.png) -->
+<p align="center">
+  <img src="image/close_loop_noise.png" width="500"/><br>
+  <em>Figure 1 – Résultat de la régulation sous turtlesim</em>
+</p>
+La tortue ne suit plus du tout les way points
+
+---
+
+## Regulateur proportionnel
+### Sans bruit dans un monde parfait KP=30 KPL=1.5
+
+```bash
+ros2 launch turtle_bringup turtle_regulation_no_noise.launch.xml
+```
+On observe le comportement suivant:
+
+<!-- ![Description de l'image](image/screen_turlte.png) -->
+<p align="center">
+  <img src="image/bringup_no_noise.png" width="500"/><br>
+  <em>Figure 1 – Résultat de la régulation sous turtlesim</em>
+</p>
+
+La tortue décrit un carré et se déplace rapidement.
+
+### On ajoute du bruit KP=30 KPL=1.5
+
+```bash
+ros2 launch turtle_bringup turtle_regulation_noise.launch.xml
+```
+On observe le comportement suivant:
+<!-- ![Description de l'image](image/screen_turlte.png) -->
+<p align="center">
+  <img src="image/bringup_noise.png" width="500"/><br>
+  <em>Figure 1 – Résultat de la régulation sous turtlesim</em>
+</p>
+
+La tortue décrit difficilement le carré.
+
+### On filtre le bruit KP=30 KPL=1.5
+
+```bash
+ros2 launch turtle_bringup turtle_regulation_bringup.launch.xml
+```
+On observe le comportement suivant:
+
+<!-- ![Description de l'image](image/screen_turlte.png) -->
+<p align="center">
+  <img src="image/bringup_filtered.png" width="500"/><br>
+  <em>Figure 1 – Résultat de la régulation sous turtlesim</em>
+</p>
+
+La tortue parvient a joindre les way points mais elle ne suit plus un carré
+### On ajuste les gain KP=6.0 KPL=0.4
+
+```bash
+ros2 launch turtle_bringup turtle_regulation_bringup.launch.xml kp:=6.0 kpl:=0.4
+```
+On observe le comportement suivant:
+
+<!-- ![Description de l'image](image/screen_turlte.png) -->
+<p align="center">
+  <img src="image/bringup_filtered_tuned.png" width="500"/><br>
+  <em>Figure 1 – Résultat de la régulation sous turtlesim</em>
+</p>
+
+La tortue décrit un carré et se déplace lentement.
+
 ---
 
 ## Topics
